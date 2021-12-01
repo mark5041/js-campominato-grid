@@ -1,0 +1,42 @@
+/* header */
+
+.title {
+    display: inline-block;
+    margin-bottom: 0;
+}
+
+.my-selection {
+    min-width: 200px;
+}
+
+.my-btn {
+    border-radius: 10px;
+    padding: 5px 20px;
+}
+
+
+/* main */
+
+main {
+    padding: 50px 0;
+}
+
+.box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    height: 80px;
+}
+
+.easy {
+    width: calc(100% / 10);
+}
+
+.normal {
+    width: calc(100% / 9);
+}
+
+.hard {
+    width: calc(100% / 7);
+}
