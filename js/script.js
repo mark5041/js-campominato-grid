@@ -8,12 +8,12 @@ function blacklist(num)
     let x = 0;
     while(myArray.length < num * 2)
     {
-        if(x != 2)
+        if(x < 2)
         {
             x++;
             do
             {
-                number = Math.floor(Math.random() * max) + min;
+                number = Math.floor(Math.random() * (max - min)) + min;
             }
             while(myArray.includes(number))
             myArray[i] = number;
@@ -24,8 +24,10 @@ function blacklist(num)
                     i--;
                     max += num;
                     min += num;
+                    
                 }
         i++;
+        console.log(min + " " + max + " " + number);
     }
     console.log(myArray);
     return myArray;
@@ -75,7 +77,7 @@ diff_selector.addEventListener('click',
                 function()
                 {
                     
-                    if(!list.includes(box.innerHTML))
+                    if(!list.includes(parseInt(box.innerText)))
                     {
                         this.classList.add("bg-green");
                     }
