@@ -3,11 +3,11 @@
 function blacklist(num, max_mines)
 {
     let myArray = [];
-    let min = 1;
     let max = num;
-    let number;
+    let min = 1;
     let i = 0;
     let x = 0;
+    let number;
     while(myArray.length < num * max_mines)
     {
         if(x < max_mines)
@@ -113,5 +113,3 @@ diff_selector.addEventListener('click',
         
     }
 );
-
-
