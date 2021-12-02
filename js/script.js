@@ -1,14 +1,16 @@
-function blacklist(num)
+
+
+function blacklist(num, max_mines)
 {
     let myArray = [];
     let min = 1;
     let max = num;
-    let number
+    let number;
     let i = 0;
     let x = 0;
-    while(myArray.length < num * 2)
+    while(myArray.length < num * max_mines)
     {
-        if(x < 2)
+        if(x < max_mines)
         {
             x++;
             do
@@ -18,7 +20,7 @@ function blacklist(num)
             while(myArray.includes(number))
             myArray[i] = number;
         }
-        else    if(x == 2)
+        else    if(x == max_mines)
                 {
                     x = 0;
                     i--;
@@ -38,38 +40,44 @@ let diff_selector = document.querySelector(".my-btn");
 diff_selector.addEventListener('click', 
     function()
     {
+        let game_over = document.querySelector(".game-over")
         let row = document.querySelector(".row");
+        row.classList.remove("d-none");
+        game_over.classList.add("d-none");
         row.innerHTML = '';
 
         let diff = document.querySelector(".my-selection");
         let col;
-        let height
+        let mines;
+        let css_paper = document.documentElement.style;
 
         switch(diff.value)
         {
             case '1':
                 col = 10;
-                height =  114;
+                mines = 2;
+                css_paper.setProperty('--size', col);
             break;
             case '2':
                 col = 9;
-                height =  126.66;
+                mines = 3;
+                css_paper.setProperty('--size', col);
             break;
             case '3':
                 col = 7;
-                height =  162.84;
+                mines = 4;
+                css_paper.setProperty('--size', col);
             break;
         }
 
-        let list = blacklist(col);
+        let list = blacklist(col, mines);
         let tot_box = col * col;
+        let size =  Math.sqrt(col);
 
         for(let i = 1; i <= tot_box; i++)
         {
             let box = document.createElement("div");
-            box.classList.add("box");
-            box.style.width = `calc(100% / ${col})`;
-            box.style.height = height + "px";
+            box.classList.add("box", "dynamic");
             box.append(i);
             row.append(box);
 
@@ -77,13 +85,27 @@ diff_selector.addEventListener('click',
                 function()
                 {
                     
-                    if(!list.includes(parseInt(box.innerText)))
+                    if(!list.includes(parseInt(box.innerText)) && box.classList.contains("dynamic"))
                     {
                         this.classList.add("bg-green");
                     }
                     else
                     {
-                        this.classList.add("bg-red");
+                        
+                        let box_created = document.querySelectorAll(".box.dynamic");
+                        for(let i = 0; i < box_created.length; i++)
+                        {
+                            if(list.includes(parseInt(box_created[i].innerText)))
+                            {
+                                box_created[i].classList.add("bg-red");
+                            }
+                            box_created[i].classList.remove("dynamic");
+                        }
+                        let score_box = document.querySelector(".score");
+                        let score = document.querySelectorAll(".box.bg-green");
+                        row.classList.add("d-none");
+                        game_over.classList.remove("d-none");
+                        score_box.innerHTML = score.length;
                     }
                 }
             );

@@ -1,3 +1,7 @@
+:root {
+    --size: 10;
+}
+
 /* header */
 
 .title {
@@ -24,22 +28,35 @@
     line-height: 1.5;
     color: #212529;
     background-color: #fff;
-    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='#{$form-select-indicator-color}' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/></svg>");
+    background-image: url("../img/chevron-down-solid.svg");
     background-repeat: no-repeat;
     background-position: right 0.75rem center;
     background-size: 16px 12px;
-    border: 1px solid #ced4da;
     border-radius: 0.25rem;
-    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
+}
+
+.my-selection::focus {
+    border: none;
 }
 
 /* main */
 
 main {
     padding: 50px 0;
+    height: auto;
+}
+
+.my-container {
+    width: 800px;
+    height: 800px;
+}
+
+.row {
+    gap: 5px;
+    height: 100%;
 }
 
 .box {
@@ -49,6 +66,8 @@ main {
     border: 1px solid black;
     font-weight: 600;
     font-size: 20px;
+    width: calc((100% / var(--size)) - 5px);
+    height: calc((100% / var(--size)) - 5px);
 }
 
 .bg-green {
